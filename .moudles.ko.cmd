@@ -1,0 +1,1 @@
+cmd_/home/lkx810/studio_Github/Timer/moudles.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/lkx810/studio_Github/Timer/moudles.ko /home/lkx810/studio_Github/Timer/moudles.o /home/lkx810/studio_Github/Timer/moudles.mod.o
