@@ -1,1 +1,0 @@
-cmd_/home/lkx810/studio_Github/Timer/timer.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/lkx810/studio_Github/Timer/timer.ko /home/lkx810/studio_Github/Timer/timer.o /home/lkx810/studio_Github/Timer/timer.mod.o

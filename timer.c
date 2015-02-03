@@ -27,12 +27,12 @@ struct timer_list mytimer;
 
 static ssize_t Timer_read(struct file *file, char *buf, size_t count, loff_t *ppos)
 {
-        int len;
         char output[20];
-	len = strlen(output);
+        int len;
+        len = strlen(output);
         if (*ppos != 0) return 0;
         snprintf(output, sizeof(output), "%d\n", _timer);   /*itoa*/
-	copy_to_user(buf,output,len);
+	    copy_to_user(buf,output,len);
         *ppos =len;
         return len;
 }
@@ -40,12 +40,12 @@ static ssize_t Timer_read(struct file *file, char *buf, size_t count, loff_t *pp
 static int Timer_write(struct file *filp, const char __user *buf, size_t count, loff_t *offset)
 {
         char dev_buf[20];
-        int len; 
+        int len;
         if (count == 0) return 0;
         if (copy_from_user(dev_buf,buf,count)) return -EINVAL;
         _timer = simple_strtoul(dev_buf, NULL, 10);    /*atoi*/
-	len = strlen(dev_buf);
         mod_timer(&mytimer, jiffies + msecs_to_jiffies(interval));
+        len = strlen(dev_buf);
         return len;
 }
 
@@ -53,8 +53,8 @@ static int Timer_write(struct file *filp, const char __user *buf, size_t count, 
 
 static struct file_operations dev_fops = {   
         .owner = THIS_MODULE,  
-        .read = Timer_read,
         .write = Timer_write,  
+        .read = Timer_read,
 }; 
 
 static struct miscdevice misc = {
@@ -63,7 +63,7 @@ static struct miscdevice misc = {
         .fops = &dev_fops,
 };
 
-static void timer_main(unsigned int a)
+static void timer_main(unsigned long a)
 {
         if (_timer >= time || _timer <0){
                 /*print UTC time*/
@@ -81,7 +81,7 @@ static void timer_main(unsigned int a)
 
 static int __init mytimer_init(void)
 {
-        setup_timer(&mytimer, timer_main,(unsigned int) 0);
+        setup_timer(&mytimer, timer_main,(unsigned long) 0);
         mytimer.expires = jiffies + msecs_to_jiffies(interval);
         printk(KERN_INFO "\n\nTimer Set.\n");
 

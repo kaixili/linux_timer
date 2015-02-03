@@ -1,4 +1,4 @@
-obj-m += moudles.o
+obj-m += timer.o
 
 PWD := $(shell pwd)
 
