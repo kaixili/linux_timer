@@ -6,7 +6,6 @@ KVER ?= $(shell uname -r)
 
 KDIR := /lib/modules/$(KVER)/build
 
- 
 
 all:
 
